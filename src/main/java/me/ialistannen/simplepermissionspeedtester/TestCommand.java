@@ -1,6 +1,8 @@
 package me.ialistannen.simplepermissionspeedtester;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.bukkit.ChatColor;
@@ -46,14 +48,17 @@ public class TestCommand implements CommandExecutor {
       return true;
     }
 
+    List<String> permissions = new ArrayList<>(executions);
+    for (int i = 0; i < executions; i++) {
+      permissions.add(strategy.generatePermission(length));
+    }
+
     long start = System.nanoTime();
 
-    boolean allSucceded = true;
+    boolean allSucceeded = true;
     for (int i = 0; i < executions; i++) {
-      String permission = strategy.generatePermission(length);
-      System.out.println(permission);
-      if (!sender.hasPermission(permission)) {
-        allSucceded = false;
+      if (!sender.hasPermission(permissions.get(i))) {
+        allSucceeded = false;
       }
     }
 
@@ -64,11 +69,11 @@ public class TestCommand implements CommandExecutor {
     sender.sendMessage(
         ChatColor.AQUA + "Took "
             + ChatColor.RED + TimeUnit.NANOSECONDS.toMillis(diff)
-            + ChatColor.AQUA + "ms to process "
+            + ChatColor.AQUA + " ms to process "
             + ChatColor.RED + executions
             + ChatColor.AQUA + " executions of length "
             + ChatColor.RED + length
-            + ChatColor.AQUA + ". (Result: " + allSucceded + ")"
+            + ChatColor.AQUA + ". (Result: " + allSucceeded + ")"
     );
 
     return true;
