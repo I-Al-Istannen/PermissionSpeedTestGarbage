@@ -39,6 +39,7 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <finalName>SimplePermissionSpeedTester</finalName>
               <minimizeJar>true</minimizeJar>
             </configuration>
           </execution>
