@@ -1,0 +1,11 @@
+name: SimplePermissionSpeedTester
+version: 1.0
+main: me.ialistannen.simplepermissionspeedtester.SimplePermissionSpeedTester
+authors: [I_Al_Istannen]
+description: Tests the speed of permission lookups.
+
+commands:
+  testPermissionSpeed:
+    permission: "test-perm-speed"
+    description: "Tests the speed of resolving permissions."
+    aliases: [permSpeed]
